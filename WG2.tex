@@ -13,7 +13,7 @@ In this section we review the upcoming challenges, identify best practices, and 
 
 \subsection{Growing Data Volumes}
 
-Figures 1-3 show the data challenge for the JENA communities, which are already reaching the exabyte scale, with still significant growth to come. While some communities, notably the LHC experiments, have dealt with such extreme data volumes for some time, petabyte-size datasets are now a de facto specification of modern scientific data instruments.  These large data volumes represent a significant challenge to the scientific communities that need to manage and analyse them.
+Figures \ref{figures:Fig1}--\ref{figures:Fig3} show the data challenge for the JENA communities, which are already reaching the exabyte scale, with still significant growth to come. While some communities, notably the LHC experiments, have dealt with such extreme data volumes for some time, petabyte-size datasets are now a de facto specification of modern scientific data instruments.  These large data volumes represent a significant challenge to the scientific communities that need to manage and analyse them.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -40,8 +40,6 @@ Figures 1-3 show the data challenge for the JENA communities, which are already 
 \label{figures:Fig3}
 \end{center}
 \end{figure}
-%% CMS REF https://cds.cern.ch/record/2815292?ln=en
-
 
 
 \subsection{FAIR Data Management}
@@ -50,7 +48,7 @@ Beyond the basic provision of computing hardware to store the data, one of the b
 
 \subsection{Growing Compute needs}
 
-The growing data volumes also often contain more information per unit volume, and this increasing complexity translates into an increased need for computing power.  Figure 4 shows the example of the ATLAS experiment~\cite{CERN-LHCC-2022-005} (for CMS see~\cite{Software:2815292}), where even with aggressive R\&D the CPU resource consumption may grow beyond the increased capacity provided by year-on-year budget increases and hardware improvements.
+The growing data volumes also often contain more information per unit volume, and this increasing complexity translates into an increased need for computing power.  Figure \ref{figures:Fig4} shows the example of the ATLAS experiment~\cite{CERN-LHCC-2022-005} (for CMS see~\cite{Software:2815292}), where even with aggressive R\&D the CPU resource consumption may grow beyond the increased capacity provided by year-on-year budget increases and hardware improvements.
 
 
 %% FIGURE 4
@@ -63,15 +61,15 @@ The growing data volumes also often contain more information per unit volume, an
 \end{figure}
 
 
-Overall, when surveyed, 90\% of respondents to the JENA/Spectrum survey reported that improving their software performance is an issue.
+Overall, when surveyed, 90\% of respondents to the JENA/Spectrum survey reported that improving their software performance is an issue~\cite{JENA-Spectrum-Survey-Report}.
 
 
 
 \subsection{Distributed computing}
 
 
-The increased need for computing power benefits from distributed computing solutions that allow scale-out beyond the capacity of single computing facilities. Again the LHC experiments have developed and optimised distributed computing solutions for some time (including significant integration into commercial cloud resources, REF).
-%https://indico.cern.ch/event/1338689/contributions/6011009/
+The increased need for computing power benefits from distributed computing solutions that allow scale-out beyond the capacity of single computing facilities. Again the LHC experiments have developed and optimised distributed computing solutions for some time (including significant integration into commercial cloud resources~\cite{Megino_2024}).
+
 For large experiments with reasonable numbers of computing experts, the benefit of using these solutions can be transformative. Unlike Rucio, there is less convergence on a common solution even within the LHC experiments. This itself represents a problem, as the communities supporting these solutions are thereby smaller, and small experimental teams have difficulties in understanding the difference between these complex solutions. In addition, as with Rucio, adoption of a solution requires a significant amount of ongoing effort from people with sufficient computing expertise.
 
 
@@ -79,15 +77,15 @@ For large experiments with reasonable numbers of computing experts, the benefit 
 \section{Technology and Hardware Evolution and Challenges}
 
 
-The hardware technology used to process data has undergone significant changes in the last decades. CPU clock frequencies largely stopped increasing since the mid-2000s (see figure 5). This has drastically limited improvements in single core performance. Moore’s Law has, however, continued, so that greater and greater numbers of transistors are found on CPU dies. These transistors are used to increase the number of cores available on the chip and to add wide vector registers that support single instruction multiple data processing (SIMD).
+The hardware technology used to process data has undergone significant changes in the last decades. CPU clock frequencies largely stopped increasing since the mid-2000s (see Figure \ref{figures:Fig5},~\cite{KRupp_Microprocessor_Data}). This has drastically limited improvements in single core performance. Moore’s Law has, however, continued, so that greater and greater numbers of transistors are found on CPU dies. These transistors are used to increase the number of cores available on the chip and to add wide vector registers that support single instruction multiple data processing (SIMD).
 
 A related innovation is the development of the general purpose processing capabilities of graphical processing units (GPUs). These are massively parallel processors, often with thousands of cores, which can achieve extremely high performance on classes of problems where the same operation is performed on wide banks of data. Data access patterns and predictability of code flow are critical to achieve good performance and not all problems are easily adapted to this model. Data must be transferred from the CPU host to the GPU device, so latency is critical to control, usually achieved by ensuring that large amounts of data are transferred and that the GPU constantly has work to do. It should be noted that the evolution of GPUs is very driven by machine learning at the moment and, while this is something we also can take advantage of (see WP4), it is favouring the development of processing power for low precision floating point operations. Thus, double precision calculations, which are often what we need, are not improving much at all.
 
 %% FIGURE  5
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{figures/Figure5} \\ 
-\caption{Microprocessor trends over the last half century.}
+\includegraphics[width=0.7\textwidth]{figures/50-years-processor-trend.pdf} \\ 
+\caption{Microprocessor trends over the last half century, from~\cite{KRupp_Microprocessor_Data}.}
 \label{figures:Fig5}
 \end{center}
 \end{figure}

@@ -310,3 +310,6 @@ publication_right_form-fast-jet-finding-julia.pdf
 # Minted/pygments files
 *.pygtex
 *.pygstyle
+
+# Editor local files
+.vscode/*
