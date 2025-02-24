@@ -1,0 +1,312 @@
+\section{Executive Summary}
+
+The scientific communities of nuclear, particle, and astroparticle physics are continuing to advance and are facing unprecedented software challenges due to growing data volumes, complex computing needs, and environmental considerations. As new experiments emerge, software and computing needs must be recognised and integrated early in design phases. This document synthesises insights from ECFA, NuPECC and APPEC, representing particle physics, nuclear physics, and astroparticle physics, and presents collaborative strategies for improving software, computing frameworks, infrastructure, and career development within these fields.
+
+
+\section{Introduction}
+
+Across the scientific domains represented by the APPEC, NuPECC, and ECFA organisations there are very significant challenges in software and computing, driven by ambitious physics programmes that deliver new detectors and observatories with increased data rates and data complexity. We discuss in this section these challenges as related to the software that is used directly to produce and process our science data, and to operate the corresponding infrastructure. The software to support these instruments, which is often very specific, is frequently ageing and needs investment, or replacement. This is particularly challenging for smaller experiments, where any dedicated effort is difficult to implement within a smaller team. As well as data rates, this is driven by a necessity to adapt to use modern hardware platforms, where high levels of parallelism are needed, particularly to execute efficiently on devices such as GPUs. The observational data, along with simulated data that models physics and detectors, needs to be reconstructed, analysed, increasingly in a distributed context, across sites and utilising facilities such as HPCs. Then it must be made available according to FAIR principles, which brings additional costs to genuinely achieve open science for these experiments. As software is so essential for our science domains, it is imperative to improve the recognition of software developers and support for their careers.
+In this section we review the upcoming challenges, identify best practices, and recommend how to bolster support for widespread adoption of effective solutions to the needs of ECFA, NuPPEC and APPEC.
+
+
+\section{Computational and Data Management Challenges}
+
+\subsection{Growing Data Volumes}
+
+Figures 1-3 show the data challenge for the JENA communities, which are already reaching the exabyte scale, with still significant growth to come. While some communities, notably the LHC experiments, have dealt with such extreme data volumes for some time, petabyte-size datasets are now a de facto specification of modern scientific data instruments.  These large data volumes represent a significant challenge to the scientific communities that need to manage and analyse them.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figures/Figure1} \\ 
+\caption{Data rates (Gbytes/day) for several astrophysics experiments.}
+\label{figures:Fig1}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.49\textwidth]{figures/Figure2a} 
+\includegraphics[width=0.47\textwidth]{figures/Figure2b} \\ 
+\caption{The required amount of storage as a function of year for the FAIR experiments at GSI. The left panel depicts the requested disk space for fast access, whereas the right panel presents the needed long-term storage space (archive). The contributions of the various research lines are indicated by different colours. The dashed line shows the current storage for FAIR Phase Zero activities.}
+\label{figures:Fig2}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{figures/Figure3a} 
+\includegraphics[width=0.45\textwidth]{figures/Figure3b} \\ 
+\caption{ATLAS projected evolution of disk (left) and tape (right) usage from 2020 until 2036, under the conservative (blue) and aggressive (red) R\&D scenarios. The grey hatched shading between the red and blue lines illustrates the range of resources consumption if the aggressive scenario is only partially achieved. The black lines indicate the impact of sustained year-on-year budget increases, and improvements in new hardware, that together amount to a capacity increase of 10\% (lower line) and 20\% (upper line). The vertical shaded bands indicate periods during which ATLAS will be taking data (not yet updated to the latest HL-LHC planning). Similar plots for the CMS experiment are available REF. }
+\label{figures:Fig3}
+\end{center}
+\end{figure}
+%% CMS REF https://cds.cern.ch/record/2815292?ln=en
+
+
+
+\subsection{FAIR Data Management}
+
+Beyond the basic provision of computing hardware to store the data, one of the biggest difficulties for scientific communities is to manage their data according to the FAIR principles. In particular for smaller experiments, where the short lifetime of an experiment combines with the diversity and uniqueness of the metadata involved, this presents significant challenges.  While larger experiments, starting with the LHC experiments, have converged on Rucio [REF] as a data management solution, the complexity of this solution still represents a significant obstacle to smaller teams of scientists who have insufficient time and computing expertise to leverage it (there are other efforts targeting smaller communities, such as EUDAT [Ref], but these have not yet seen adoption in ENA). And even while Rucio supports FAIR data principles, it requires significant expert effort to provide sufficient metadata to Rucio to fully adhere to those principles, with additional work needed to make data available outside of a collaboration.
+
+\subsection{Growing Compute needs}
+
+The growing data volumes also often contain more information per unit volume, and this increasing complexity translates into an increased need for computing power.  Figure 4 shows the example of the ATLAS experiment (for CMS see REF), where even with aggressive R\&D the CPU resource consumption may grow beyond the increased capacity provided by year-on-year budget increases and hardware improvements.
+
+
+%% FIGURE 4
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figures/Figure4} \\ 
+\caption{ATLAS projected evolution of compute usage from 2020 until 2036, under the conservative (blue) and aggressive (red) R\&D scenarios. The grey hatched shading between the red and blue lines illustrates the range of resources consumption if the aggressive scenario is only partially achieved. The black lines indicate the impact of sustained year-on-year budget increases, and improvements in new hardware, that together amount to a capacity increase of 10\% (lower line) and 20\% (upper line). The vertical shaded bands indicate periods during which ATLAS will be taking data  (not yet updated to the latest HL-LHC planning). Similar plots for the CMS experiment are available REF. }
+\label{figures:Fig4}
+\end{center}
+\end{figure}
+
+
+Overall, when surveyed, 90\% of respondents to the JENA/Spectrum survey reported that improving their software performance is an issue.
+
+
+
+\subsection{Distributed computing}
+
+
+The increased need for computing power benefits from distributed computing solutions that allow scale-out beyond the capacity of single computing facilities. Again the LHC experiments have developed and optimised distributed computing solutions for some time (including significant integration into commercial cloud resources, REF).
+%https://indico.cern.ch/event/1338689/contributions/6011009/
+For large experiments with reasonable numbers of computing experts, the benefit of using these solutions can be transformative. Unlike Rucio, there is less convergence on a common solution even within the LHC experiments. This itself represents a problem, as the communities supporting these solutions are thereby smaller, and small experimental teams have difficulties in understanding the difference between these complex solutions. In addition, as with Rucio, adoption of a solution requires a significant amount of ongoing effort from people with sufficient computing expertise.
+
+
+
+\section{Technology and Hardware Evolution and Challenges}
+
+
+The hardware technology used to process data has undergone significant changes in the last decades. CPU clock frequencies largely stopped increasing since the mid-2000s (see figure 5). This has drastically limited improvements in single core performance. Moore’s Law has, however, continued, so that greater and greater numbers of transistors are found on CPU dies. These transistors are used to increase the number of cores available on the chip and to add wide vector registers that support single instruction multiple data processing (SIMD).
+
+A related innovation is the development of the general purpose processing capabilities of graphical processing units (GPUs). These are massively parallel processors, often with thousands of cores, which can achieve extremely high performance on classes of problems where the same operation is performed on wide banks of data. Data access patterns and predictability of code flow are critical to achieve good performance and not all problems are easily adapted to this model. Data must be transferred from the CPU host to the GPU device, so latency is critical to control, usually achieved by ensuring that large amounts of data are transferred and that the GPU constantly has work to do. It should be noted that the evolution of GPUs is very driven by machine learning at the moment and, while this is something we also can take advantage of (see WP4), it is favouring the development of processing power for low precision floating point operations. Thus, double precision calculations, which are often what we need, are not improving much at all.
+
+%% FIGURE  5
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figures/Figure5} \\ 
+\caption{Microprocessor trends over the last half century.}
+\label{figures:Fig5}
+\end{center}
+\end{figure}
+
+
+Architectural divergence is another significant trend. After many years where the $x86_64$ machines dominated, ARM processors are now making significant inroads into data centres - 27\% of survey respondents have software supported on $aarch46$. Here they compete favourably in power consumption per unit of work. Other architectures on the horizon include RISC-V, where Europe has strategic ambitions. All of this requires software which supports these platforms. For GPUs the situation is also diverse, with Nvidia dominant, but with hardware from AMD and Intel available - JENA communities already target these platforms: 48\%, 21\% and 17\% of our survey reported building software for these platforms, respectively. Note that all of these devices have SDKs which are different, so generic coding for GPUs is still problematic. 
+
+For real-time data processing FPGAs also play a role, as these devices excel at high throughput and low latency applications. The challenge here is the steep learning curve for firmware programming, a task that is generally executed by specialised engineers. Packages that convert code from other languages to FPGA programming languages (e.g. VHDL) have been developed within and outside the field, a widely used example for ML applications is HLS4ML.
+
+Finally, a totally different computing paradigm emerges in quantum computing. This is still in its infancy, and delivery of usable quantum computers is on an unknown timescale (and probably at least a decade away). When (or if) they arrive, this will mean utterly different programming models for which much R\&D would be required. It should also be noted that quantum computing would supplement current digital computers, not replace them.
+
+
+\section{Software Development and Best Practices}
+
+High data rates, data complexity, challenging hardware, and the need to adapt to the latest algorithmic techniques all demand improved software development practices. Here we summarise some of the most important trends that have emerged. All of these require effort and appropriate skills. Adoption remains patchy across our communities, pointing to a lack of investment in these areas. Recently funded initiatives, such as EVERSE [REF], have begun their work on delivering frameworks and recommendations that researchers in our fields can adopt to improve their software development, as in “Guidelines” below. The FAIR4RS [Ref] principles are supported by almost all of the following points.
+
+\subsection{Open Source Software}
+
+Initiatives on open software started in the 80s, and the three JENA communities made a significant effort to adopt open source licences since the 2010s, making sure research software source code was made public. Clear software policy on copyright and licences is essential to allow effective scientific collaboration and the community is already widely using licences such as Apache 2 or GPL. There should be strong advice to stick to standard licences and to understand the implication of a particular licence choice, including incompatible choices (HSF and CERN have published guidelines). Shockingly, 46\% of survey respondents (mostly individual developers and small groups) reported not having a licensing model for their software.
+
+\subsection{Software versioning}
+
+Software versioning is a cornerstone of code management, and widespread adoption by the community leads to a noticeable improvement in software quality. The practice is now adopted by most software collaborations, even the smallest ones. This has been possible with the widespread adoption of git as a version control system (replacing less good solutions, such as SVN) and the deployment of institutional code versioning services, such as Gitlab, or Microsoft’s GitHub. This is a good example of how institutional investment makes a noticeable difference in scientific output.
+
+Code versioning helps guarantee that the software is preserved and can be made publicly available, it also promotes improved quality by providing tools for issue tracking, code review, documentation, and CI/CD, to mention but a few. 
+
+
+\subsection{Automated workflows}
+
+Automation of complex software workflows, such as data analysis and simulation, is key to mitigate the impact of resource intensive computing tasks. In addition, an automated workflow provides an excellent means towards reproducible analysis, by encoding the whole production process of a scientific result in a machine, and sometimes human, readable way. Platforms such as REANA aim at delivering a comprehensive environment to deploy such workflows effectively. At the moment use in our communities is patchy and should be expanded.
+
+Software should be developed with the use of workflow automation tools, such as Snakemake or DVC [dvc.org], in mind - in particular to be properly versioned as mentioned above. The crucial addition of data versioning and provenance should also be integrated in those workflows. 
+
+\subsection{Deployment and distribution}
+
+Many paths to deployment or distribution exist and suitable choices should be made depending on the use case. The technology is also evolving at a fast path and exploring new options then adjusting best practice is essential. Expert networks, such as EVERSE, are an important tool for this technology watch and dissemination activity. 
+
+While source code distribution should always be available, in practice it rarely allows for easy execution of the software. Recording the dependencies and the environment of the software (e.g. Conda and similar tools) is an essential first step towards usable distribution.
+
+In addition, offering the application as a ready to use container (e.g., Docker, Apptainer) is an excellent choice both for deployment and long term preservation and reproducibility. Code versioning front-ends offer solutions to automate the production and distribution of containers, however this can become resource-intensive for the computing centre providing the service. For instance IN2P3’s Gitlab instance no longer supports container production on its servers and asks collaborations to provide the computing resources to produce their containers.
+
+Again maintaining monitoring on the required  investment in both person power, training and infrastructure is crucial to continue offering the tools and services needed to apply those good practices.
+
+
+\subsection{Documentation}
+
+Appropriate documentation should be provided with all software, regardless of its size and use. It is important to differentiate the type of documentation that should be provided: user documentation on how to install and run the software; scientific documentation explaining what the code does and how; and, finally, developer documentation, on how the code is structured and the functionality implemented.
+
+An extremely promising approach, which would reduce the burden on experts, is to use AI to help generate docstrings for code (e.g. Doxygen and similar); and more adventurously, training large language models on package code, client code (for how it is really used), and forum postings to provide a modern expert AI based help system. This will need some investment in effective, integrated use of these tools and systems.
+
+In any case the documentation activities still need to be better recognised and rewarded, in order to improve developer motivation on this subject.  Undocumented software negatively impacts the ability of collaborations to deliver their science in the medium and long-term.  The implications for careers in scientific computing is discussed in WP5.
+
+
+\subsection{Software collaboration and Management}
+
+
+In many instances software is developed as part of a detector system or experiment. While this organisation allows each collaboration to limit its software dependencies, it has the drawback of limiting the scientific impact of the software (due to limited re-use) and limiting the accessible pool of software specialists.
+
+Of course exceptions exist, with software such as ROOT, GEANT4, CORSIKA, etc. ubiquitous within our three communities. Other examples are middleware which provides key functionality to manage and access storage and computing resources. More use of smaller toolkit components, e.g., AwkwardArray, that leverages the flexibility of the Python ecosystem in a very domain independent way.
+
+Strengthening software collaborations should help the community to have a clearer picture of what could be reused and how, favouring cross-collaboration development. Moreover, such well structured collaborations should mean they have a longer lifetime, supporting better documentation, optimisation and support. This all requires good software management, with a clear understanding of costs (including the very real cost of poor software), value and recognition.
+
+
+\subsection{Legacy Code Maintenance and Modernization: toward continuous integration}
+
+Many software suites and tools are based on legacy code, which poses challenges in terms of maintenance and compatibility with new technologies. This raises the questions of what strategy to adopt to maintain those crucial tools. Either training new developers to take over the maintenance of those tools (e.g., training in Fortran, which is still used quite widely, particularly in the theory domain) or redeveloping that software in more modern languages, some investment will be required. Rewrites will usually be more expensive, but offer considerable opportunities to optimise the software, so would be more justified for the critical code path. We have many examples of critical software ported from FORTRAN to C++: PAW to ROOT, Geant3 to Geant4, Pythia6 to Pythia8. Those investments proved to be essential in maintaining and extending our software capabilities in the long run.
+
+This in turn implies the need for a clear software road map at the institutional level. Listing critical software for our communities and making sure resources and skills are matched to guarantee maintenance, update, and optimisation.
+
+\subsection{AI\/ML use in software}
+
+The rise of uses of AI and ML techniques within our software suites has opened new doors to software development, including AI coding assistants, such as Copilot. However, still young, those practices are still evolving very fast and it is therefore very difficult to define a set of established good practices. This subject is covered in much more detail in WP4, however, with reference to integration with other software we point that it is vital to integrate ML in a reproducible and preservable way.
+
+MLOps, a services suite allowing the tracking and versioning of models is, for example, essential for reproducibility and optimisation. Those services are yet not mainstream at the institutional level, but this should be anticipated, just like DevOps are cornerstone services for software development today. To some extent DevOps and MLOps start to interact and overlap, with Gitlab offering Model Registry and MLflows interfaces.
+
+It is clear that those novel techniques could allow new types of code optimisation and therefore have a very positive impact on computing needs in the future. Especially AI driven Simulation or AI monitoring of code could help save large amounts of computing resources.
+
+
+\subsection{Performance and Portability}
+
+As discussed in the section on hardware evolution, developing high performance scientific software is a real challenge in a heterogeneous environment. Effort to avoid architecturally specific code is not too onerous for CPU applications, but it remains challenging for GPUs or FPGAs, where generic SDKs lag behind vendor specific offerings and evolution is unclear. Vendor lock-in is to be avoided and the academic community should push for more open standards. However, for performance critical code paths (e.g., real-time data analysis and reduction), where such architectures are needed, requires significant, skilled, developer effort. Overall, 90\% of survey respondents reported that software performance has to improve in the future.
+
+In all cases, validation systems need to be enhanced to cover multiple architectures that will not be bit-for-bit identical; and code distribution for multiple architectures adds complexity.
+
+\subsection{Guidelines}
+
+Best practices should be made clear at the institutional level. Guidelines are essential as are effective tools that can be used to establish a common ontology, a clear definition of best practices, and how best to implement them. 
+
+A few instances of such guidelines exist, although it is still not a widespread practice. Guidelines should stay flexible and be updated regularly by software specialists. They should propose solutions that are scalable and sustainable, i.e., simple solutions [CITE Tiers of software] for smaller collaborations with more complex ones reserved for larger collaborations, where investment is amortised.
+
+This is an important step towards recognition of its value and impact. The threshold for publication should be made clearer, as well as the means to publish.
+
+
+\subsection{Software publication}
+
+It should be made clear that software should be considered a research output in itself, and more regularly published as an academic work. Best practice is to have a reference paper in a refereed journal, including modern lightweight software publications such as Journal of Open Source Software, combined with an automated archival process to Zenodo and/or Software Heritage. Both are compatible, and then give DOIs that cover the software in general and specific versions that can be cited and the code itself becomes available via its DOI. This helps address points of findable and accessible from the FAIR principles. The recent ESCAPE OSSR initiative makes use of Zenodo to provide a framework of well defined metadata and quality check from the community to make sure referenced software is readily reusable and meets FAIRness criteria.
+
+The community of software specialists also needs to contribute as reviewers in both specialist journals (e.g. JOSS) and curation services (e.g. ESCAPE OSSR) to ensure those models of publication stay relevant.
+
+
+\section{Open Science Data and Frameworks}
+
+There is a large overlap in the requirements of meeting FAIR data and software principles REF
+% [https://www.nature.com/articles/s41597-022-01710-x] 
+and the requirements of Open Science, particularly for data. To support Open Science, scientific experiments need to, in many ways, operate as observatories, producing well curated data products for direct consumption by anybody, and support this data with suitable software. This is directly the role of the ESCAPE collaboration (along with other EU science clusters) and various EOSC initiatives.
+
+
+\subsection{Open Science Data equals FAIR Data}
+
+Independently of embargo periods, the requirement to provide the data for Open Science fulfils FAIR data principles.  Although the huge and complex raw data volumes produced by LHC experiments do not lend themselves to Open Science, much progress has been made in producing smaller, curated datasets that do.  Meanwhile, small and medium-sized experiments, thanks to the challenges of applying FAIR principles, arguably have the hardest time in producing data that can be used for Open Science.
+
+The convergence upon Rucio as part of a FAIR Data Management solution is encouraging.  Development is still needed, particularly in the realm of metadata, which can be very challenging.  Without all of the accompanying metadata needed to completely exploit the scientific data products, the scope of Open Science is limited.  Limitations for Open Science correlate strongly with weaknesses in data preservation efforts, and thereby suggest potential concerns over the long-term curation of the data.  Equally, if these problems can be addressed by Rucio, and the various scientific communities are given the resources they need to adopt Rucio, the outlook is good.
+
+\subsection{Open Science Frameworks equals FAIR Software}
+
+Reproducibility is a key requirement for science.  It is therefore surprising, at least for non-experts, to discover that reproducibility (in the strict sense of the word) is in practice often extremely difficult to guarantee, especially for the long term. A large part of the problem stems from the way that much of the scientific software used to produce results is developed and maintained (see section 4).
+
+Frameworks like REANA (a platform for Reusable and Reproducible Analysis) aim to address this problem by encapsulating an entire analysis.  Analysis typically consists of a series of steps that constitute a workflow.  REANA uses a combination of containers, to capture the whole software stack for each step, and a workflow language e.g. Snakemake to express the workflow including all necessary metadata. Publishing the software in containers together with the complete workflow including metadata and provenance is a powerful step towards FAIR software.
+
+
+\subsection{FAIR Principles equals Open Science}
+
+The synergies between the requirements of Open Science, and fulfilling the requirements of FAIR Data and Software, should be leveraged.  Supporting Open Science directly implies the application of FAIR principles which is of direct benefit to the experiments themselves. This requires experiments to have the resources they need to exploit the required tools, requiring investment from funding agencies.
+
+
+\section{Environmental Sustainability and Resource Allocation}
+
+Scientific computing expends environmental resources. This includes equipment manufacturing costs (CO2, rare earth metals, purified water, etc.) as well as the costs of powering machines in data centres. Long term storage costs for data should also not be neglected, particularly the fraction of data on disk has a higher environmental cost than tape [Ref if we can find one]. 
+
+First and foremost in the strategy to reduce environmental costs is to not perform data processing or computations at all. While this might seem a facile point, critically examining the value of a particular processing step for its scientific benefit should be done regularly (as experiments mature and detectors are better understood early calibration workflows or very fat data formats can be dropped). Secondly, software itself must be efficient at its job - this should not come at the expense of maintainability, but opportunities (the famous “3\%” [Ref: Knuth, Structured Programming With Go To Statements, Computing Surveys, Vol 6, No 4, December 1974]) should not be neglected. This implies strongly that “heavy lifting code”, which is numerically intensive, has to live in a language such as C/C++, Fortran or Julia; use of Python should only be at higher levels. Common or reusable software can unlock the development effort required for sustainable efficient codes, particularly for smaller experiments who could not develop this independently.
+
+Data reduction should be tackled as early as possible in the process for two reasons. Firstly, it allows for less data to be saved to long term storage, reducing costs. Secondly, it allows for early extraction of the most useful physics results at higher rates. This can improve physics reach and, in the case of astroparticle physics, is also an essential component of science alerts for multi-wavelength prompt observations.
+
+Ensuring that an experiment or observatory can use the most optimal hardware for its workflow is also important, given the heterogeneous nature of future scientific computing. This would imply that software is built for $x86_64$ and ARM processors, and potentially also on GPUs (see 4.10). This is a software and operational challenge that requires investment in good software engineering and validation. The benefit is enhanced flexibility to run where resources are available. For smaller experiments, lacking efforts, use of generic and toolkit solutions can help them to still benefit.
+
+To really take advantage of this kind of flexibility, it is necessary to invest in a good data and workflow management system, which can access available resources, managing the needed data. For this to be viable for smaller projects, development of tools that are easier to deploy and manage is needed, as well as laboratory support for operations. This is a general problem for scientific computing where investment in suitable tools can help a lot. Good workflow management (e.g., tools like Snakemake) can also optimise which parts of a workflow need to be rerun, avoiding duplicate jobs and reducing computing costs.
+
+While it is somewhat outside the scope of a software discussion, computing sites can also contribute directly to reducing monetary and environmental costs. Power efficient architectures, low PUEs and heat recovery can help minimise impact. Power can be sourced sustainably and power loads reduced when energy supplies become carbon intensive. This requires dialogue between resource providers and users so that expectations and turn-around time are understood.
+
+
+\section{Human Resources, Training and Career Development}
+
+\subsection{Bridging the Skills Gap}
+
+The community is simultaneously facing a skills crisis, with a lack of human resources, and a growing complexity of software and computing tools, which absolutely demands specialists. Bridging this gap is difficult because the domain is in direct competition with a strong and wealthy industry that offers high quality and high salary jobs. The situation calls for a rethinking of the career paths of software specialists, whether from an engineering or physics background.
+Training and hiring of multi-skilled staff with both domain knowledge and software skills is essential. This requires investment from the community to bring early career staff to a high level of competency. At the same time, institutions should develop and enforce a strong hiring policy offering permanent positions early to promising software specialists.
+Two main career paths could be identified, on the one hand, software specialists hired primarily as physicists, or domain specific software experts (DSSEs), bringing insight on what the community needs. On the other hand, software experts hired in engineering positions, a Research Software Engineer (RSE), who brings expertise on the most appropriate technology to use and accelerate their implementation.
+In practice a strong overlap can exist early in people’s careers, as many RSEs are hired after a physics PhD (although this is very uneven across regions). The careers are however frequently differentiated, with different criteria for career advancement. Domain specific software experts for example are often evaluated primarily on scientific production, while their primary activity is related to software development. On the other hand, limited freedom is sometimes provided to RSEs assigned to supporting services rather than research groups. 
+In both cases, the gap should be closed by training in specific software skills for DSSEs and scientific culture for RSEs. Making clear what role software specialists play in our scientific endeavour is essential to create a sense of belonging and maintain engagement. In a time when workplace culture, sense of purpose, and recognition play a bigger role than salary in job choices, the community has a unique opportunity to attract new talent to the field and prepare for the future.
+
+\subsection{Sustaining Training Events and Material}
+
+As mentioned many times in the document, training is a cornerstone of bringing the community to its full potential. Varied and abundant training material (suitable for self-study) should therefore be produced and curated, and it is therefore essential that training activities are recognised as an essential part of research.
+A mixture of in-person and online training schools, self-usable training material, and of course best practices guidelines could be produced. There is a strong opportunity for sharing the training effort between our three sub-communities as many of the challenges and tools are the same. Networks such as EVERSE are key in delivering high quality material at a lower human cost by bringing together a large panel of software specialists.
+
+
+\section{Conclusion and Recommendations}
+
+The research communities of APPEC, ECFA and NuPPEC face significant challenges related to software and computing in the coming years. From the JENA/Spectrum survey 90\% of respondents reported that improving their software performance is an issue, due to data rates, physics goals and resource shortfall; additionally 58\% reported lacking the necessary resources to do so. Here we identify specific positive policy decisions that, backed up by investment, will help.
+\\
+
+{\bf Support Open Science and FAIR principles for software, aligned with robust data preservation and access}\\
+
+Only with appropriate software is the value of open data unlocked, so FAIR4RS principles should be expected and rewarded. Clear policies and support from laboratories and host institutes can help researchers in multiple areas to build up a body of practice from which everyone will benefit. This practice should be based on, and develop, appropriate standards with community and expert input.
+
+We make note in particular of the need to support access to important previous results in our fields, such as HEPdata or the proper management of nuclear physics data, which is a combined software and data preservation/access challenge.
+\\
+
+{\bf Invest in software maintenance and in the development of modern software solutions that help reduce environmental impact}\\
+
+
+The maintenance of current software in the face of system upgrades and architectural diversity needs low level, but consistent, support. Yet, there is also a great need for radically improved software vital to manage the data complexity and rates from future facilities.
+
+Modern hardware demands the use of parallelism for efficiency, where multi-threading is usually also required in order to manage memory consumption. For the most intensive tasks, moving to SIMD and GPU processing can bring huge benefits, but the development costs and required skill levels are significant. As platforms diversify, more effort is then needed to maintain build and validation systems. To make use of the heterogeneous resources expected at European computing sites, such an investment is vital. Ensuring a vigorous program of R\&D into promising languages (e.g., Julia) and into abstraction layers in our workhorses of Python and C++ will enable informed choices that will ultimately save effort.
+
+Investment in efficient, flexible code not only can give better science outcomes, but has a direct impact on reducing the environmental costs of computing: less machines are needed, more power efficient platforms are accessible.
+\\
+
+{\bf Strategically invest in software that serves multiple experiments and disciplines and optimises data and workflow management}\\
+
+Insofar as software can meet common goals for multiple users, well engineered systems deserve enhanced investment, particularly given the software engineering demands above. Common, well-written software is particularly valuable for smaller experiments who may struggle to maintain even their basic software stack.
+
+Of particular note, unlocking the potential of distributed computing, especially for smaller endeavours, needs better, easier to use tools for data and workflow management.
+
+Collaborations across disciplines need specific targeted support so that all members can effectively contribute. We should also take advantage of initiatives such as EOSC (e.g., the EVERSE project), the Science Clusters, such as ESCAPE, or community efforts such as the HEP Software Foundation.
+\\
+
+{\bf Optimally use and allocate computational resources}\\
+
+Notwithstanding software improvements, experiments will require additional computational resources to support higher data rates, the growing need for real-time data processing, and complex simulations. This may involve upgrading existing computing infrastructure and exploring, e.g., cloud-based solutions. Good science and software engineering cases must be presented, but optimal computing resource consumption must be seen as an integral part of the design, construction and exploitation of new experiments.
+\\
+
+{\bf Recognise new multi-paradigm techniques and invest in training and reward trainers}\\
+
+The range of skills required to develop effective, scalable software solutions is very broad, with machine learning, data science techniques, high-performance computing and DevOps all playing a part (and new technologies will continue to emerge in the future). This requires quality training material and investment from program pilots, lessons authors and maintainers, instructors and helpers. Such efforts need to be properly recognised as valuable so that people will be motivated to develop, support and teach these skills.
+\\
+
+{\bf Reward software and computing work and provide suitable career paths}\\
+
+To achieve our science goals in a way that also meets the requirements of Open Science and FAIR requires investment in people who can write, maintain and improve the software that is required by our collaborations. Such work needs to be seen as an integral part of our experiments and a first class citizen of research.
+
+This investment critically has to cover viable career paths for such staff, without which their commitment to our field will wane. New roles are emerging that can be considered as viable for software experts - in particular the research software engineer position. Policy makers and funders should continue to be creative in finding the means to support the software experts on whom are critically reliant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
