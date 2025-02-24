@@ -12,8 +12,12 @@
 \usepackage{amsmath, amssymb}
 
 % references
-\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage[style=numeric-comp,sorting=none,backend=biber,language=british]{biblatex}
 \addbibresource{bibliography.bib}
+% The following makes "visited" strings in the bibliography appear as, e.g.,
+% Jan. 2, 1970 (which is US style, but unambiguous) instead of 01/02/1979,
+% which is awful...
+\ExecuteBibliographyOptions{alldates=long}
 
 % fonts
 \usepackage{helvet}

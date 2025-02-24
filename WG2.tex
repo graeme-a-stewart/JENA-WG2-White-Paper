@@ -18,7 +18,7 @@ Figures 1-3 show the data challenge for the JENA communities, which are already 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{figures/Figure1} \\ 
-\caption{Data rates (Gbytes/day) for several astrophysics experiments.}
+\caption{Data rates (Gbytes/day) for several astrophysics experiments~\cite{berghöfer2015modelcomputingeuropeanastroparticle}.}
 \label{figures:Fig1}
 \end{center}
 \end{figure}
@@ -27,7 +27,7 @@ Figures 1-3 show the data challenge for the JENA communities, which are already 
 \begin{center}
 \includegraphics[width=0.49\textwidth]{figures/Figure2a} 
 \includegraphics[width=0.47\textwidth]{figures/Figure2b} \\ 
-\caption{The required amount of storage as a function of year for the FAIR experiments at GSI. The left panel depicts the requested disk space for fast access, whereas the right panel presents the needed long-term storage space (archive). The contributions of the various research lines are indicated by different colours. The dashed line shows the current storage for FAIR Phase Zero activities.}
+\caption{The required amount of storage as a function of year for the FAIR experiments at GSI. The left panel depicts the requested disk space for fast access, whereas the right panel presents the needed long-term storage space (archive). The contributions of the various research lines are indicated by different colours. The dashed line shows the current storage for FAIR Phase Zero activities.} % Reference needed
 \label{figures:Fig2}
 \end{center}
 \end{figure}
@@ -36,7 +36,7 @@ Figures 1-3 show the data challenge for the JENA communities, which are already 
 \begin{center}
 \includegraphics[width=0.45\textwidth]{figures/Figure3a} 
 \includegraphics[width=0.45\textwidth]{figures/Figure3b} \\ 
-\caption{ATLAS projected evolution of disk (left) and tape (right) usage from 2020 until 2036, under the conservative (blue) and aggressive (red) R\&D scenarios. The grey hatched shading between the red and blue lines illustrates the range of resources consumption if the aggressive scenario is only partially achieved. The black lines indicate the impact of sustained year-on-year budget increases, and improvements in new hardware, that together amount to a capacity increase of 10\% (lower line) and 20\% (upper line). The vertical shaded bands indicate periods during which ATLAS will be taking data (not yet updated to the latest HL-LHC planning). Similar plots for the CMS experiment are available REF. }
+\caption{ATLAS projected evolution of disk (left) and tape (right) usage from 2020 until 2036, under the conservative (blue) and aggressive (red) R\&D scenarios~\cite{CERN-LHCC-2022-005}. The grey hatched shading between the red and blue lines illustrates the range of resources consumption if the aggressive scenario is only partially achieved. The black lines indicate the impact of sustained year-on-year budget increases, and improvements in new hardware, that together amount to a capacity increase of 10\% (lower line) and 20\% (upper line). The vertical shaded bands indicate periods during which ATLAS will be taking data (not yet updated to the latest HL-LHC planning). Similar plots for the CMS experiment are available~\cite{Software:2815292}.}
 \label{figures:Fig3}
 \end{center}
 \end{figure}
@@ -46,18 +46,18 @@ Figures 1-3 show the data challenge for the JENA communities, which are already 
 
 \subsection{FAIR Data Management}
 
-Beyond the basic provision of computing hardware to store the data, one of the biggest difficulties for scientific communities is to manage their data according to the FAIR principles. In particular for smaller experiments, where the short lifetime of an experiment combines with the diversity and uniqueness of the metadata involved, this presents significant challenges.  While larger experiments, starting with the LHC experiments, have converged on Rucio [REF] as a data management solution, the complexity of this solution still represents a significant obstacle to smaller teams of scientists who have insufficient time and computing expertise to leverage it (there are other efforts targeting smaller communities, such as EUDAT [Ref], but these have not yet seen adoption in ENA). And even while Rucio supports FAIR data principles, it requires significant expert effort to provide sufficient metadata to Rucio to fully adhere to those principles, with additional work needed to make data available outside of a collaboration.
+Beyond the basic provision of computing hardware to store the data, one of the biggest difficulties for scientific communities is to manage their data according to the FAIR principles~\cite{Wilkinson2016}. In particular for smaller experiments, where the short lifetime of an experiment combines with the diversity and uniqueness of the metadata involved, this presents significant challenges.  While larger experiments, starting with the LHC experiments, have converged on Rucio~\cite{Barisits2019} as a data management solution, the complexity of this solution still represents a significant obstacle to smaller teams of scientists who have insufficient time and computing expertise to leverage it (there are other efforts targeting smaller communities, such as EUDAT~\cite{EUDAT}, but these have not yet seen adoption in ENA). And even while Rucio supports FAIR data principles, it requires significant expert effort to provide sufficient metadata to Rucio to fully adhere to those principles, with additional work needed to make data available outside of a collaboration.
 
 \subsection{Growing Compute needs}
 
-The growing data volumes also often contain more information per unit volume, and this increasing complexity translates into an increased need for computing power.  Figure 4 shows the example of the ATLAS experiment (for CMS see REF), where even with aggressive R\&D the CPU resource consumption may grow beyond the increased capacity provided by year-on-year budget increases and hardware improvements.
+The growing data volumes also often contain more information per unit volume, and this increasing complexity translates into an increased need for computing power.  Figure 4 shows the example of the ATLAS experiment~\cite{CERN-LHCC-2022-005} (for CMS see~\cite{Software:2815292}), where even with aggressive R\&D the CPU resource consumption may grow beyond the increased capacity provided by year-on-year budget increases and hardware improvements.
 
 
 %% FIGURE 4
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{figures/Figure4} \\ 
-\caption{ATLAS projected evolution of compute usage from 2020 until 2036, under the conservative (blue) and aggressive (red) R\&D scenarios. The grey hatched shading between the red and blue lines illustrates the range of resources consumption if the aggressive scenario is only partially achieved. The black lines indicate the impact of sustained year-on-year budget increases, and improvements in new hardware, that together amount to a capacity increase of 10\% (lower line) and 20\% (upper line). The vertical shaded bands indicate periods during which ATLAS will be taking data  (not yet updated to the latest HL-LHC planning). Similar plots for the CMS experiment are available REF. }
+\caption{ATLAS projected evolution of compute usage from 2020 until 2036, under the conservative (blue) and aggressive (red) R\&D scenarios~\cite{CERN-LHCC-2022-005}. The grey hatched shading between the red and blue lines illustrates the range of resources consumption if the aggressive scenario is only partially achieved. The black lines indicate the impact of sustained year-on-year budget increases, and improvements in new hardware, that together amount to a capacity increase of 10\% (lower line) and 20\% (upper line). The vertical shaded bands indicate periods during which ATLAS will be taking data  (not yet updated to the latest HL-LHC planning). Similar plots for the CMS experiment are available~\cite{Software:2815292}. }
 \label{figures:Fig4}
 \end{center}
 \end{figure}
