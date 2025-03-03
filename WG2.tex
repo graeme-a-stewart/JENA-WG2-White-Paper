@@ -157,16 +157,15 @@ This in turn implies the need for a clear software road map at the institutional
 
 \subsection{AI and ML use in software}
 
-The rise of uses of AI and ML techniques within our software suites has opened new doors to software development, including AI coding assistants, such as Copilot. However, still young, those practices are still evolving very fast and it is therefore very difficult to define a set of established good practices. This subject is covered in much more detail in WP4, however, with reference to integration with other software we point that it is vital to integrate ML in a reproducible and preservable way.
+The rise of uses of AI and ML techniques within our software suites has opened new doors to software development, including AI coding assistants, such as Copilot. These opportunities are still evolving quickly and it is therefore very difficult to define a set of established good practices. However, there is clear potential to improve developer productivity.
 
-MLOps, a services suite allowing the tracking and versioning of models is, for example, essential for reproducibility and optimisation. Those services are yet not mainstream at the institutional level, but this should be anticipated, just like DevOps are cornerstone services for software development today. To some extent DevOps and MLOps start to interact and overlap, with Gitlab offering Model Registry and MLflows interfaces.
+There is also the question of integrating ML/AI workflows into the software itself. MLOps, a services suite allowing the tracking and versioning of models is, for example, essential for reproducibility and optimisation. Those services are yet not mainstream at the institutional level, but this should be anticipated, just like DevOps are cornerstone services for software development today. To some extent DevOps and MLOps start to interact and overlap, with Gitlab offering Model Registry and MLflows interfaces.
 
-It is clear that those novel techniques could allow new types of code optimisation and therefore have a very positive impact on computing needs in the future. Especially AI driven Simulation or AI monitoring of code could help save large amounts of computing resources.
-
+It is clear that those novel techniques could allow new types of code optimisation and therefore have a very positive impact on computing needs in the future. Especially AI driven Simulation or AI monitoring of code could help save large amounts of computing resources. This subject is covered in much more detail in WP4.
 
 \subsection{Performance and Portability}
 
-As discussed in the section on hardware evolution, developing high performance scientific software is a real challenge in a heterogeneous environment. Effort to avoid architecturally specific code is not too onerous for CPU applications, but it remains challenging for GPUs or FPGAs, where generic SDKs lag behind vendor specific offerings and evolution is unclear~\cite{atif2023evaluatingportableparallelizationstrategies}. Vendor lock-in is to be avoided and the academic community should push for more open standards. However, for performance critical code paths (e.g., real-time data analysis and reduction), where such architectures are needed, requires significant, skilled, developer effort. Overall, 90\% of survey respondents reported that software performance has to improve in the future.
+As discussed in the section on hardware evolution, developing high performance scientific software is a real challenge in a heterogeneous environment. Effort to avoid architecturally specific code is not too onerous for CPU applications, but it remains challenging for GPUs or FPGAs, where generic SDKs lag behind vendor specific offerings and evolution is unclear~\cite{atif2023evaluatingportableparallelizationstrategies}. Vendor lock-in is to be avoided and the academic community should push for more open standards, e.g., the Alpaka library~\cite{MathesP3MA2017} and evolution of C++ itself. However, for performance critical code paths (e.g., real-time data analysis and reduction), where such architectures are needed, requires significant, skilled, developer effort. Overall, 90\% of survey respondents reported that software performance has to improve in the future.
 
 In all cases, validation systems need to be enhanced to cover multiple architectures that will not be bit-for-bit identical; and code distribution for multiple architectures adds complexity.
 
@@ -186,29 +185,27 @@ It should be made clear that software should be considered a research output in 
 The community of software specialists also needs to contribute as reviewers in both specialist journals (e.g. JOSS) and curation services (e.g. ESCAPE OSSR) to ensure those models of publication stay relevant.
 
 
-\section{Open Science Data and Frameworks}
+\section{Open Science the FAIR Principles}
 
 There is a large overlap in the requirements of meeting FAIR data and software principles
-and the requirements of Open Science, particularly for data. To support Open Science, scientific experiments need to, in many ways, operate as observatories, producing well curated data products for direct consumption by anybody, and support this data with suitable software. This is directly the role of the ESCAPE collaboration (along with other EU science clusters) and various EOSC initiatives.
+and the requirements of Open Science. To support Open Science, scientific experiments need to, in many ways, operate as observatories, producing well curated data products for direct consumption by anybody, and support this data with suitable software. This is directly the role of the EU science clusters and various other EOSC initiatives.
 
 
-\subsection{Open Science Data equals FAIR Data}
+\subsection{Open Science and FAIR Data}
 
 Independently of embargo periods, the requirement to provide the data for Open Science fulfils FAIR data principles.  Although the huge and complex raw data volumes produced by LHC experiments do not lend themselves to Open Science, much progress has been made in producing smaller, curated datasets that do.  Meanwhile, small and medium-sized experiments, thanks to the challenges of applying FAIR principles, arguably have the hardest time in producing data that can be used for Open Science.
 
-The convergence upon Rucio as part of a FAIR Data Management solution is encouraging.  Development is still needed, particularly in the realm of metadata, which can be very challenging.  Without all of the accompanying metadata needed to completely exploit the scientific data products, the scope of Open Science is limited.  Limitations for Open Science correlate strongly with weaknesses in data preservation efforts, and thereby suggest potential concerns over the long-term curation of the data.  Equally, if these problems can be addressed by Rucio, and the various scientific communities are given the resources they need to adopt Rucio, the outlook is good.
+The convergence upon Rucio as part of a FAIR Data Management solution is encouraging.  Development is still needed, particularly in the realm of metadata, which can be very challenging.  Without all of the accompanying metadata needed to completely exploit the scientific data products, the scope of Open Science is limited.  Limitations for Open Science correlate strongly with weaknesses in data preservation efforts, and thereby suggest potential concerns over the long-term curation of the data.  Equally, if these problems can be addressed by Rucio, and the various scientific communities are given the resources they need to adopt Rucio, the outlook is positive.
 
-\subsection{Open Science Frameworks equals FAIR Software}
+\subsection{Open Science Frameworks and FAIR Software}
 
 Reproducibility is a key requirement for science.  It is therefore surprising, at least for non-experts, to discover that reproducibility (in the strict sense of the word) is in practice often extremely difficult to guarantee, especially for the long term. A large part of the problem stems from the way that much of the scientific software used to produce results is developed and maintained (see section 4).
 
-Frameworks like REANA (a platform for Reusable and Reproducible Analysis) aim to address this problem by encapsulating an entire analysis.  Analysis typically consists of a series of steps that constitute a workflow.  REANA uses a combination of containers, to capture the whole software stack for each step, and a workflow language e.g. Snakemake to express the workflow including all necessary metadata. Publishing the software in containers together with the complete workflow including metadata and provenance is a powerful step towards FAIR software.
+Frameworks like REANA (a platform for Reusable and Reproducible Analysis) aim to address this problem by encapsulating an entire analysis.  Analysis typically consists of a series of steps that constitute a workflow.  REANA uses a combination of containers, to capture the whole software stack for each step, and a workflow language, e.g., Snakemake to express the workflow including all necessary metadata. Publishing the software in containers together with the complete workflow including metadata and provenance is a powerful step towards FAIR software.
 
-
-\subsection{FAIR Principles equals Open Science}
+\subsection{FAIR Principles and Open Science}
 
 The synergies between the requirements of Open Science, and fulfilling the requirements of FAIR Data and Software, should be leveraged.  Supporting Open Science directly implies the application of FAIR principles which is of direct benefit to the experiments themselves. This requires experiments to have the resources they need to exploit the required tools, requiring investment from funding agencies.
-
 
 \section{Environmental Sustainability and Resource Allocation}
 
