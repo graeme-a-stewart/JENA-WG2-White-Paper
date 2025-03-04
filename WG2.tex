@@ -122,10 +122,11 @@ Software should be developed with the use of workflow automation tools, such as 
 
 \subsection{Deployment and distribution}
 
-Many paths to deployment or distribution exist and suitable choices should be made depending on the use case. The technology is also evolving at a fast pace and exploring new options and then adjusting best practice is essential. Expert networks, such as EVERSE, are an important tool for this technology watch and dissemination activity. 
+Many paths to deployment and distribution exist and suitable choices should be made depending on the use case. The technology is also evolving at a fast pace and exploring new options and then adjusting best practice is essential. Expert networks, such as EVERSE, are an important tool for this technology watch and dissemination activity. 
 
-While source code distribution should always be available, in practice it rarely allows for easy execution of the software. Recording the dependencies and the environment of the software (e.g., Conda and similar tools) is an essential first step towards software distribution.
+While source code distribution should always be available, in practice it rarely allows for easy execution of the software. Recording the dependencies and the environment of the software (e.g. using Conda and similar tools) is an essential first step towards a more complete software distribution.
 
+% just noting we're conflating containers and images here but this is commonly understood I think!
 In addition, offering the application as a ready to use container (e.g., Docker, Apptainer) is an excellent choice both for deployment and long term preservation and reproducibility. Code versioning front-ends offer solutions to automate the production and distribution of containers, however this can become resource-intensive for the computing centre providing the service. For instance IN2P3's Gitlab instance no longer supports building containers on its servers and asks collaborations to provide the computing resources to produce their own containers.
 
 Again, maintaining the required investment in person power, training and infrastructure is crucial to continue offering the tools and services needed to apply these good practices.  The level of investment needs to be continually monitored to ensure that it is maintained.
@@ -135,7 +136,7 @@ Again, maintaining the required investment in person power, training and infrast
 
 Appropriate documentation should be provided with all software, regardless of its size and use. It is important to differentiate the type of documentation that should be provided: user documentation on how to install and run the software; scientific documentation explaining what the code does and how; and, finally, developer documentation, on how the code is structured and the functionality implemented.
 
-An extremely promising approach, which would reduce the burden on experts, is to use AI to help generate docstrings for code (e.g., Doxygen and similar); more adventurously, training large language models on external packages, client code (for how it is really used), and user help forums could provide a modern expert AI-based help system. This will require some investment to make  effective use of these tools and integrate them into scientific ecosystems.
+An extremely promising approach, which would reduce the burden on experts, is to use AI to help generate docstrings for code (e.g., Doxygen and similar); more adventurously, training large language models on external packages, client code (for how it is really used), and posts on user help forums could provide a modern expert AI-based help system. It will require some investment to make  effective use of these tools and integrate them into scientific ecosystems.
 
 In any approach, documentation activities must be better recognised and rewarded, in order to improve developer motivation on this subject.  Undocumented software negatively impacts the ability of collaborations to deliver their science in the medium and long-term.  The implications for careers in scientific computing are discussed in JENA WP5 \cite{JENA_WG_Reports}.
 
